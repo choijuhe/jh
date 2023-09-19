@@ -79,6 +79,7 @@ int main() {
 	vector <Calculator*> vc;
 	char user_operator;
 	string progress_status;
+	string progress_status_to_upper;
 
 	vc.push_back(&sm);
 	vc.push_back(&sb);
@@ -115,11 +116,15 @@ int main() {
 		while (1) {
 			cout << "연산을 계속 진행하시겠습니까? (Y: 계속, AC: 초기화, EXIT: 종료) ";
 			cin >> progress_status;
-			if (progress_status[0] == 'E') {
+			for (char c : progress_status) {
+				progress_status_to_upper += toupper(c);
+			}
+
+			if (progress_status_to_upper == "EXIT") {
 				cout << "계산기를 종료합니다." << endl;
 				break;
 			}
-			else if (progress_status[0] == 'Y') {
+			else if (progress_status_to_upper == "Y") {
 				cout << "연산자를 입력해주세요. : ";
 				cin >> user_operator;
 				cout << "숫자를 입력해주세요. : ";
@@ -159,4 +164,4 @@ int main() {
 	return 0;
 }
 
-//소문자 y를 입력하는 경우..
+//소문자 y를 입력하는 경우..->했어
