@@ -3,12 +3,13 @@
 #include <cstdlib>
 #include <vector>
 #include <string>
-
+#include <exception>
 using namespace std;
 
 int main() {
 	srand(time(NULL));
 	string user_choose = "";
+	string not_word;
 	int computer_choose;
 	int end_three = 0;
 	vector <int> three_computer_choose;
@@ -42,7 +43,25 @@ int main() {
 		three_user_choose.clear();
 		cout << "1 ~ 9 사이의 숫자 3개를 입력하시오. (이외의 숫자 : 종료)" << endl;
 		getline(cin, user_choose);
-		count++;
+		
+
+		try {
+			for (char c : user_choose) {
+				not_word = c;
+				stoi(not_word);
+			}
+		}
+		catch (const exception& expn) {
+			cout << "숫자만 입력해주세요!" << endl;
+			continue;
+		}
+		catch (...) {
+			cout << "뭔데이게" << endl;
+		}
+		
+			count++;
+		
+		
 		
 
 		
@@ -94,3 +113,6 @@ int main() {
 	
 	return 0;
 }
+//문자 입력 못하게->stoi함수:맨앞에 숫자가 입력되면 그것만 문자형에서 숫자형으로 변경
+// ->그 뒤의 문자는 그냥 무시. 그래서 문자가 인식이 안됨.
+//중복된 숫자 입력못하게
